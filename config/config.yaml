@@ -1,0 +1,103 @@
+# AI Robinhood Agent configuration.
+#
+# Thresholds live here so behavior is auditable and reproducible. A subset of
+# these values can be overridden by environment variables (see .env.example).
+# The risk guardian has final say: any blocking finding vetoes an order when
+# decision_policy.block_on_critical is true.
+
+decision_policy:
+  approval_threshold: 40.0      # aggregate risk score that forces human approval
+  block_on_critical: true       # a blocking finding always vetoes the order
+  require_manual_approval: false # set true to route every order to a human
+
+execution:
+  mode: paper                   # paper | robinhood_mcp
+  live_trading_enabled: false   # must be true AND mode=robinhood_mcp for live orders
+  paper_state_path: .paper_state/blotter.json
+
+strategy:
+  toggles:
+    rebalancing: true
+    concentration: true
+    momentum: true
+    mean_reversion: true
+    thematic: true
+    dca: true
+    company_news: true
+    relative_strength: true
+  rebalancing:
+    drift_tolerance_pct: 5.0
+    min_trade_notional: 100.0
+  momentum:
+    lookback_bars: 20
+    buy_return_pct: 8.0
+    sell_return_pct: -8.0
+  mean_reversion:
+    lookback_bars: 20
+    zscore_buy: -2.0
+    zscore_sell: 2.0
+  thematic:
+    per_name_target_pct: 0.05
+    max_new_names: 3
+  dca:
+    cadence: weekly
+    contribution_amount: 250.0
+  news:
+    provider: offline           # offline | live (live is a disabled stub)
+    lookback_hours: 24
+    positive_strength: 0.6
+    negative_strength: 0.6
+  relative_strength:
+    lookback_bars: 20
+    outperform_pct: 5.0         # excess trailing return vs benchmark to buy
+    underperform_pct: -5.0      # excess trailing return vs benchmark to exit
+    per_name_target_pct: 0.05
+
+# US market benchmark for relative strength and alpha estimation.
+benchmark:
+  symbol: SPY
+  lookback_bars: 20
+
+# Deterministic US market-regime classifier (advisory; never changes a decision).
+macro:
+  enabled: true
+  vix_risk_off: 25.0            # VIX at/above signals risk-off
+  vix_risk_on: 15.0            # VIX at/below signals a calm tape
+  inverted_curve_penalty: true # penalize an inverted 10Y-2Y curve
+
+# Market-data provider. Live US sources (Yahoo/Alpha Vantage/Polygon) are gated stubs.
+market_data:
+  provider: offline             # offline | live
+
+risk:
+  position_size:
+    max_position_pct: 0.20
+    max_order_notional: 25000.0
+  concentration:
+    max_sector_pct: 0.40
+  daily_loss:
+    max_daily_loss_pct: 5.0     # intraday drawdown kill-switch
+  order_rate:
+    max_orders_per_run: 12
+  price_deviation:
+    max_limit_deviation_pct: 10.0
+  buying_power:
+    cash_buffer_pct: 0.02
+  pdt:
+    max_day_trades: 3
+  liquidity:
+    max_volatility: 0.08
+    max_spread_pct: 1.0
+    min_average_volume: 100000.0
+  wash_sale:
+    enabled: true               # US IRS 30-day wash-sale awareness (advisory)
+    window_days: 30
+    severity: 50.0
+    blocking: false
+  market_hours:
+    block_when_closed: true      # veto orders outside the US regular session
+    allow_extended_hours: false
+
+memory:
+  enabled: false                # collective memory is opt-in and advisory only
+  path: .agent_memory/memory.db

@@ -1,0 +1,52 @@
+{
+  "name": "ai-robinhood-agent",
+  "version": "1.0.0",
+  "description": "Agent Skills for a deterministic, risk-governed equities trading agent that proposes trades with a strategy swarm and lets an independent risk guardian make the final call. Paper mode by default; optional Robinhood Agentic Trading (MCP) execution is gated behind explicit safety switches.",
+  "license": "MIT",
+  "keywords": [
+    "trading",
+    "equities",
+    "us-market",
+    "sp500",
+    "risk-management",
+    "agents",
+    "robinhood",
+    "agentic-trading",
+    "mcp",
+    "ai"
+  ],
+  "skills": [
+    "skills/using-robinhood-agent",
+    "skills/portfolio-intake",
+    "skills/market-enrichment",
+    "skills/macro-regime",
+    "skills/company-news",
+    "skills/rebalancing-strategy",
+    "skills/concentration-analysis",
+    "skills/momentum-strategy",
+    "skills/mean-reversion-strategy",
+    "skills/thematic-strategy",
+    "skills/dca-strategy",
+    "skills/relative-strength-strategy",
+    "skills/risk-guardian",
+    "skills/wash-sale-guard",
+    "skills/market-hours-guard",
+    "skills/trade-decisioning",
+    "skills/order-execution",
+    "skills/trade-reporting"
+  ],
+  "agents": [
+    "agents/portfolio-strategist.md",
+    "agents/risk-officer.md",
+    "agents/execution-trader.md"
+  ],
+  "references": [
+    "references/strategy-playbook.md",
+    "references/risk-limits.md",
+    "references/us-market-conventions.md",
+    "references/us-market-data-sources.md",
+    "references/execution-and-safety.md",
+    "references/robinhood-mcp-integration.md",
+    "references/memory-and-learning.md"
+  ]
+}

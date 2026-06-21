@@ -1,4 +1,8 @@
-# AI Robinhood Agent
+<p align="center">
+  <img src="assets/banner.svg" alt="Quill - AI Robinhood Agent" width="100%">
+</p>
+
+# Quill &middot; AI Robinhood Agent
 
 **A deterministic, risk-governed multi-agent trading engine for US equities.** A swarm
 of strategy agents proposes orders, a deterministic macro-regime read frames the US

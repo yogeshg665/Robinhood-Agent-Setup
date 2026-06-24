@@ -25,6 +25,25 @@ It runs in **paper (simulated) mode by default**; optional execution through
 > does not control, supervise, monitor, recommend, or audit third-party AI agents.
 > Review `robinhood.com/us/en/support/agentic-trading` before enabling anything live.
 
+## Contents
+
+- [Highlights](#highlights)
+- [Framework](#framework)
+- [How it differs from LLM trading frameworks](#how-it-differs-from-llm-trading-frameworks)
+- [Installation](#installation)
+- [Required APIs and data sources](#required-apis-and-data-sources)
+- [CLI usage](#cli-usage)
+- [Markets and tickers](#markets-and-tickers)
+- [Python usage](#python-usage)
+- [Persistence and recovery](#persistence-and-recovery)
+- [Reproducibility](#reproducibility)
+- [Safety model](#safety-model)
+- [Configuration](#configuration)
+- [Develop](#develop)
+- [Repository layout](#repository-layout)
+- [References](#references)
+- [License](#license)
+
 ## Highlights
 
 - **US-market aware.** SPY-relative strength and a one-day alpha estimate, a

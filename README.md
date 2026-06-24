@@ -298,6 +298,8 @@ environment variables; see [.env.example](.env.example). Nothing is hardcoded in
 
 ## Develop
 
+Run the same quality gates as CI — skill validation, linting, type-checking, and tests:
+
 ```bash
 python scripts/validate_skills.py
 python -m ruff check src/robinhood_agent tests
